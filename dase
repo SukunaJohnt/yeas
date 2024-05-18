@@ -16,6 +16,13 @@ local FruitMoves = {};
 while shared.FruitBattlegrounds do
     pcall(function()
 	wait(0.25);
+
+    for i,v in pairs(game.Players.LocalPlayer.PlayerGui:GetDescendants()) do 
+         if v:IsA("BoolValue") and v.Name == "__ADONIS_WINDOW" then 
+             v.Parent:Destroy()
+         end 
+        end 
+        
 	if game.Workspace.Characters.Players:FindFirstChild(game.Players.LocalPlayer.Name) == nil then 
         game:GetService("VirtualInputManager"):SendKeyEvent(true,"BackSlash",false,game.Players.LocalPlayer)
         game:GetService("VirtualInputManager"):SendKeyEvent(false,"BackSlash",false,game.Players.LocalPlayer)
@@ -24,7 +31,7 @@ while shared.FruitBattlegrounds do
         wait(2)
 	elseif game.Workspace.Characters.Players:FindFirstChild(game.Players.LocalPlayer.Name) then 
 
-        if LocalPlayer.Character.Stats:GetAttribute("Stamina") >= getgenv().Ammount then 
+        if LocalPlayer.Character.Stats:GetAttribute("Stamina") <= getgenv().Ammount then 
             LocalPlayer.Character.Humanoid.Health = 0
           end
 
