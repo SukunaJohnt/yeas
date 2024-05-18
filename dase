@@ -1,4 +1,4 @@
- --loadstring(game:HttpGetAsync("https://cdn.wearedevs.net/scripts/Dex%20Explorer%20V2.txt"))()
+ --loadstring(game:HttpGet("https://raw.githubusercontent.com/SukunaJohnt/yeas/main/dase"))()
 
 if game.PlaceId ~= 9224601490 or shared.FruitBattlegrounds then return end;
 
@@ -16,12 +16,13 @@ local FruitMoves = {};
 while shared.FruitBattlegrounds do
     pcall(function()
 	wait(0.25);
-	if PlayerGui:FindFirstChild("UI") and PlayerGui.UI.MainMenu.Visible == true then 
+	if game.Workspace.Characters.Players:FindFirstChild(game.Players.LocalPlayer.Name) == nil then 
         game:GetService("VirtualInputManager"):SendKeyEvent(true,"BackSlash",false,game.Players.LocalPlayer)
         game:GetService("VirtualInputManager"):SendKeyEvent(false,"BackSlash",false,game.Players.LocalPlayer)
         game:GetService("VirtualInputManager"):SendKeyEvent(true,"Return",false,game.Players.LocalPlayer)
         game:GetService("VirtualInputManager"):SendKeyEvent(false,"Return",false,game.Players.LocalPlayer)
-	elseif PlayerGui:FindFirstChild("UI") and PlayerGui.UI.MainMenu.Visible == false then 
+        wait(2)
+	elseif game.Workspace.Characters.Players:FindFirstChild(game.Players.LocalPlayer.Name) then 
 
         if LocalPlayer.Character.Stats:GetAttribute("Stamina") >= getgenv().Ammount then 
             LocalPlayer.Character.Humanoid.Health = 0
