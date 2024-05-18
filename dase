@@ -1,5 +1,12 @@
  --loadstring(game:HttpGet("https://raw.githubusercontent.com/SukunaJohnt/yeas/main/dase"))()
 
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(3)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
 if game.PlaceId ~= 9224601490 or shared.FruitBattlegrounds then return end;
 
 shared.FruitBattlegrounds = true;
