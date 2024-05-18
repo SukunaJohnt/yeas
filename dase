@@ -14,17 +14,13 @@ local CurrentData = MainData:WaitForChild("Fruits"):WaitForChild(MainData:WaitFo
 local FruitMoves = {};
 
 while shared.FruitBattlegrounds do
+    pcall(function()
 	wait(0.25);
 	if PlayerGui:FindFirstChild("UI") and PlayerGui.UI.MainMenu.Visible == true then 
-        local Signals = {"Activated", "MouseButton1Down", "MouseButton2Down", "MouseButton1Click", "MouseButton2Click"}
-        for _,v in pairs(  PlayerGui.UI.MainMenu.Buttons:GetChildren()) do
-           if  v:IsA("TextButton") and v.Name == "Play" then
-               for i,Signal in pairs(Signals) do
-                   firesignal(v[Signal])
-               end
-           end
-        end
-
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"BackSlash",false,game.Players.LocalPlayer)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,"BackSlash",false,game.Players.LocalPlayer)
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"Return",false,game.Players.LocalPlayer)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,"Return",false,game.Players.LocalPlayer)
 	elseif PlayerGui:FindFirstChild("UI") and PlayerGui.UI.MainMenu.Visible == false then 
 
         if LocalPlayer.Character.Stats:GetAttribute("Stamina") >= getgenv().Ammount then 
@@ -47,4 +43,5 @@ while shared.FruitBattlegrounds do
 			end
 		end
 	end
+end)
 end;
