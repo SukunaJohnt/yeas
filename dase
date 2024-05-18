@@ -1,22 +1,23 @@
+--a
  --loadstring(game:HttpGet("https://raw.githubusercontent.com/SukunaJohnt/yeas/main/dase"))()
--- private
  local vu = game:GetService("VirtualUser")
  game:GetService("Players").LocalPlayer.Idled:connect(function()
     vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
     wait(3)
     vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
  end)
- 
+
 if game.PlaceId ~= 9224601490 or shared.FruitBattlegrounds then return end;
 
 shared.FruitBattlegrounds = true;
-getgenv().AmmountToDie = 100
+getgenv().Ammount = 100
 local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local Players = game:GetService("Players");
 local LocalPlayer = Players.LocalPlayer;
 local PlayerGui = LocalPlayer.PlayerGui;
 local MainData = LocalPlayer:WaitForChild("MAIN_DATA")
 local CurrentData = MainData:WaitForChild("Fruits"):WaitForChild(MainData:WaitForChild("Slots")[MainData:WaitForChild("Slot").Value].Value);
+
 
 
 while shared.FruitBattlegrounds do
@@ -28,7 +29,7 @@ while shared.FruitBattlegrounds do
              v.Parent:Destroy()
          end 
         end 
-
+        
 	if game.Workspace.Characters.Players:FindFirstChild(game.Players.LocalPlayer.Name) == nil then 
         game:GetService("VirtualInputManager"):SendKeyEvent(true,"BackSlash",false,game.Players.LocalPlayer)
         game:GetService("VirtualInputManager"):SendKeyEvent(false,"BackSlash",false,game.Players.LocalPlayer)
@@ -37,26 +38,26 @@ while shared.FruitBattlegrounds do
         wait(2)
 	elseif game.Workspace.Characters.Players:FindFirstChild(game.Players.LocalPlayer.Name) then 
 
-        local Players = game:GetService("Players");
-local LocalPlayer = Players.LocalPlayer;
-        if AmmountToDie >= LocalPlayer.Character.Stats:GetAttribute("Stamina")  then 
+        if getgenv().Ammount >= LocalPlayer.Character.Stats:GetAttribute("Stamina") then 
             LocalPlayer.Character.Humanoid.Health = 0
           end
 
 		LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-323.617798, 557.921387, -1409.63855, 0.555497468, -1.6509567e-08, 0.831518233, -7.00516978e-09, 1, 2.45345451e-08, -0.831518233, -1.94538039e-08, 0.555497468);
+        local FruitMoves = {};
 
-        
-        local FruitMoves = {}
-        for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
-             if v:IsA("Tool") then 
-                table.insert(FruitMoves,v.Name)
-             end 
-            end 
+        if #FruitMoves == 0 then
+            for i,v in pairs(LocalPlayer.Backpack:GetChildren()) do
+                if v.ClassName == "Tool" and CurrentData.Level.Value >= v:GetAttribute("Level") then
+                    FruitMoves[#FruitMoves + 1] = string.gsub(v.Name, " ", "");
+                end
+            end
+        end 
 
 		for i,v in pairs(FruitMoves) do
-            game:GetService("ReplicatedStorage").Replicator:InvokeServer(CurrentData.Name, v, {});
+			if not LocalPlayer.Cooldowns:FindFirstChild(v) then
+				ReplicatedStorage.Replicator:InvokeServer(CurrentData.Name, v, {});
 			end
 		end
+	end
 end)
 end;
-
