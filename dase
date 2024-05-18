@@ -10,7 +10,7 @@
 if game.PlaceId ~= 9224601490 or shared.FruitBattlegrounds then return end;
 
 shared.FruitBattlegrounds = true;
-getgenv().Ammount = 100
+getgenv().Ammount = 20
 local ReplicatedStorage = game:GetService("ReplicatedStorage");
 local Players = game:GetService("Players");
 local LocalPlayer = Players.LocalPlayer;
