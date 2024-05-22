@@ -1,4 +1,7 @@
+--test2
 --a
+repeat wait() until game:IsLoaded()
+wait(5)
  --loadstring(game:HttpGet("https://raw.githubusercontent.com/SukunaJohnt/yeas/main/dase"))()
  local vu = game:GetService("VirtualUser")
  game:GetService("Players").LocalPlayer.Idled:connect(function()
@@ -56,6 +59,42 @@ while shared.FruitBattlegrounds do
 		for i,v in pairs(FruitMoves) do
 			if not LocalPlayer.Cooldowns:FindFirstChild(v) then
 				ReplicatedStorage.Replicator:InvokeServer(CurrentData.Name, v, {});
+                local args = {
+                    [1] = CurrentData.Name,
+                    [2] = v,
+                    [3] = {
+                        ["Raycast"] = {
+                            ["Normal"] = Vector3.yAxis,
+                            ["Direction"] = Vector3.new(-284.63690185546875, -94.75055694580078, -2.042678117752075),
+                            ["Origin"] = Vector3.new(388.879150390625, 738.8067626953125, -678.883056640625),
+                            ["Instance"] = workspace:WaitForChild("Map"):WaitForChild("Model"):WaitForChild("Part"),
+                            ["Distance"] = 27.08168601989746,
+                            ["Material"] = Enum.Material.Foil,
+                            ["Position"] = Vector3.new(363.184326171875, 730.25341796875, -679.0674438476562)
+                        }
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Replicator"):InvokeServer(unpack(args))
+
+             
+                local args = {
+                    [1] = CurrentData.Name,
+                    [2] = v,
+                    [3] = {
+                        ["MouseRay"] = {
+                            ["Normal"] = Vector3.new(-1, 0, 0),
+                            ["Direction"] = Vector3.new(243.93722534179688, -29.086833953857422, 172.1876983642578),
+                            ["Origin"] = Vector3.new(355.51043701171875, 735.9651489257812, -714.4842529296875),
+                            ["Instance"] = workspace:WaitForChild("Map"):WaitForChild("Model"):WaitForChild("Part"),
+                            ["Distance"] = 26.503665924072266,
+                            ["Material"] = Enum.Material.Foil,
+                            ["Position"] = Vector3.new(377.0611877441406, 733.3954467773438, -699.272216796875)
+                        }
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage"):WaitForChild("Replicator"):InvokeServer(unpack(args))
 			end
 		end
 	end
